@@ -16,9 +16,11 @@ import {
   Typography,
 } from "@material-ui/core";
 import { getMatchDetail } from "../api/api";
+import { getPlayers } from "../api/api";
 
 const MyCard = ({ match }) => {
   const [detail, setDatail] = useState({});
+  const [detail1, setDetail] = useState({});
   const [open, setOpen] = useState(false);
 
   const getMatchCard = () => (
@@ -65,6 +67,15 @@ const MyCard = ({ match }) => {
             >
               Starting time {new Date(match.dateTimeGMT).toLocaleString()}
             </Button>
+            <Button
+              onClick={() => {
+                showPlayersBtnClicked(match["unique_id"]);
+              }}
+              variant="outlined"
+              color="secondary"
+            >
+             Players
+             </Button>
           </Grid>
         </CardActions>
       </Card>
@@ -82,6 +93,19 @@ const MyCard = ({ match }) => {
         console.log(error);
       });
   };
+
+  const showPlayersBtnClicked = (id) => {
+    getPlayers(id)
+      .then((data) => {
+        console.log(data);
+        setDetail(data);
+        handleClickOpen();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -115,6 +139,37 @@ const MyCard = ({ match }) => {
               <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
                 {" "}
                 {detail.score}
+              </span>
+            </Typography>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Players Detail..."}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <Typography>{detail1.stat}</Typography>
+            <Typography>
+              Players
+              <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
+                {detail1.matchStarted ? "name" : "Not Found"}
+              </span>
+            </Typography>
+            <Typography>
+              Run Scored
+              <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
+                {" "}
+                {detail1.score}
               </span>
             </Typography>
           </DialogContentText>
