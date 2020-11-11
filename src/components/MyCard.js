@@ -149,30 +149,48 @@ const MyCard = ({ match }) => {
           </Button>
         </DialogActions>
       </Dialog>
+
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Players Detail..."}</DialogTitle>
+        <DialogTitle id="alert-dialog-title1">{"Players Detail..."}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <Typography>{detail1.stat}</Typography>
             <Typography>
-              Players
+              Team
               <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
                 {detail1.matchStarted ? "name" : "Not Found"}
               </span>
             </Typography>
             <Typography>
-              Run Scored
+              Batting
               <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
-                {" "}
-                {detail1.score}
+                {detail1.matchStarted ? "name" : "Not Found"}
               </span>
             </Typography>
-          </DialogContentText>
+            <Typography>
+              Bowling
+              <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
+                {detail1.matchStarted ? "name" : "Not Found"}
+              </span>
+            </Typography>
+            <Typography>
+              Fielding
+              <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
+                {detail1.matchStarted ? "name" : "Not Found"}
+              </span>
+            </Typography>
+            <Typography>
+              Man of the Match
+              <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
+                {detail1.matchStarted ? "name" : "Not Found"}
+              </span>
+            </Typography>
+            </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary" autoFocus>
