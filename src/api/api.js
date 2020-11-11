@@ -21,7 +21,7 @@ export const getMatchDetail = (id) => {
     .catch((error) => console.log(error));
 };
 export const getPlayers = (id) => {
-  const url = `https://cricapi.com/api/fantasySquad?unique_id=${id}&apikey=${API_KEY}`;
+  const url = `https://cricapi.com/api/fantasySummary?unique_id=${id}&apikey=${API_KEY}`;
   return fetch(url)
     .then((response) => response.json())
     .catch((error) => console.log(error));
