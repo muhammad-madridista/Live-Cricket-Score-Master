@@ -18,10 +18,13 @@ import {
 import { getMatchDetail } from "../api/api";
 import { getPlayers } from "../api/api";
 
+
+
 const MyCard = ({ match }) => {
   const [detail, setDatail] = useState({});
   const [detail1, setDetail] = useState({});
   const [open, setOpen] = useState(false);
+  const [open1,setOpen1]= useState(false);
 
   const getMatchCard = () => (
     <div>
@@ -94,19 +97,6 @@ const MyCard = ({ match }) => {
       });
   };
 
-  const showPlayersBtnClicked = (id) => {
-    getPlayers(id)
-      .then((data) => {
-        console.log(data);
-        setDetail(data);
-        handleClickOpen();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -114,6 +104,30 @@ const MyCard = ({ match }) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+
+  const showPlayersBtnClicked = (id) => {
+    getPlayers(id)
+      .then((data) => {
+        console.log(data);
+        setDetail(data);
+        handleClickOpen1();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleClickOpen1 = () => {
+    setOpen1(true);
+  };
+
+  const handleClose1 = () => {
+    setOpen1(false);
+  };
+
+
+
 
   return (
     <>
@@ -151,8 +165,8 @@ const MyCard = ({ match }) => {
       </Dialog>
 
       <Dialog
-        open={open}
-        onClose={handleClose}
+        open={open1}
+        onClose={handleClose1}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -160,12 +174,6 @@ const MyCard = ({ match }) => {
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <Typography>{detail1.stat}</Typography>
-            <Typography>
-              Team
-              <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
-                {detail1.matchStarted ? "name" : "Not Found"}
-              </span>
-            </Typography>
             <Typography>
               Batting
               <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
@@ -193,7 +201,7 @@ const MyCard = ({ match }) => {
             </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button onClick={handleClose1} color="primary" autoFocus>
             Close
           </Button>
         </DialogActions>
