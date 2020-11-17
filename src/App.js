@@ -29,15 +29,8 @@ function App() {
           <Grid sm="2"></Grid>
           <Grid sm="8">
           {
-            matches &&
-            <ul>
-            {
-              matches.map(match => <li key={match.id}>{match.date}</li>)
-            }
-            </ul>
-            }
-
-              { matches && matches.map((match) => {
+          
+              { matches } && matches.map((match) => {
                 return(
                 <Fragment>
               { match.type=="Twenty20" ? (<MyCard key={match.unique_id} match={match} />)
